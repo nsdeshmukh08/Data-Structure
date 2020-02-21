@@ -6,13 +6,14 @@ class Node {
 }
 
 class LinkList {
+
     constructor(){
         this.head = null;
         this.size = 0;
     }
 
     //Add node at first index
-    addAtFirstIndex = (data) =>{
+    addAtFirstIndex = (data) => {
         this.head = new Node(data, this.head);
         this.size ++;
     }
@@ -21,7 +22,6 @@ class LinkList {
     addAtIndex = (data, index) => {
         const newNode = new Node(data,index);
         let current = this.head;
-        let lastNode = null;
         let previouse = current;
         let count = 0;
         if(!current) {
@@ -90,9 +90,37 @@ class LinkList {
         return current.data;
     }
 
+    // Clear all nodes from the link list.
     clearAll = () =>{
         this.head = null;
         this.size = 0;
+    }
+
+    // Iterative way to reverse the Link List
+    // reverceLinkList = () => {
+    //    let current = this.head;
+    //    let previouse = null;
+
+    //    while(current){
+    //         let nextNode = current.next;
+    //         current.next = previouse;
+    //         previouse=current;
+    //         current = nextNode;
+    //    }
+
+    //    this.head = previouse;
+    // }
+
+    // Recursive way to reverse the Link List
+    reverceLinkList = (current) => {
+      if(current.next == null){
+          this.head = current;
+      }else{
+          this.reverceLinkList(current.next);
+          let nextNode = current.next;
+          nextNode.next = current;
+          current.next = null;
+      }
     }
 
     //Print link list data
@@ -124,7 +152,7 @@ ll.addNodeAtLast(4);
 ll.addAtIndex(3,2);
 
 //Remove from perticular index
-ll.removeAtIndex(2);
+//ll.removeAtIndex(2);
 
 // Count number of node in link list
 console.log("Node count is ====>", ll.countNodes());
@@ -133,7 +161,12 @@ console.log("Node count is ====>", ll.countNodes());
 console.log("Data at node 1 is ===>",ll.getAtIndex(1));
 
 // Clear all nodes in link list
-ll.clearAll();
+//ll.clearAll();
+
+ll.printData();
+
+// Revers the link list 
+ll.reverceLinkList(ll.head, null, null);
 
 // Print data from the list.
 ll.printData();
