@@ -18,41 +18,41 @@ class LinkList {
         this.size ++;
     }
 
-    //Add node at perticular index
+    //Add node at particular index
     addAtIndex = (data, index) => {
         const newNode = new Node(data);
         let current = this.head;
-        let previouse = current;
+        let previous = current;
         let count = 0;
         if(!current) {
             current = newNode;
         } else {
             while(count < index){
-                previouse = current;
+                previous = current;
                 current = current.next;
                 count ++;
             }
 
-            previouse.next = newNode;
+            previous.next = newNode;
             newNode.next = current;
         }
         this.size ++;
     }
 
-    //Remove node from perticular index
+    //Remove node from particular index
     removeAtIndex = (index) => {
         let current = this.head;
-        let previouse = current;
+        let previous = current;
         let count = 0;
        if(index === count){
         this.head = current.next;
        }else{
         while(count < index){
-            previouse = current;
+            previous = current;
             current = current.next;
             count ++;
         }
-        previouse.next = current.next;
+        previous.next = current.next;
        }
         this.size --;
     }
@@ -81,7 +81,7 @@ class LinkList {
         return this.size;
     }
 
-    // Get node at perticular index
+    // Get node at particular index
     getAtIndex = (index) => {
         let count = 0;
         let current = this.head;
@@ -100,32 +100,32 @@ class LinkList {
     }
 
     //Iterative way to reverse the Link List
-    // reverceLinkList = () => {
+    // reverseLinkList = () => {
     //   let current = this.head;
-    //   let previouse = null;
+    //   let previous = null;
     //   let nextNode = current.next;
 
     //   while(current){
     //     //current = current.next;
-    //     current.next = previouse;
-    //     previouse = current;
+    //     current.next = previous;
+    //     previous = current;
     //     current = nextNode;
     //     nextNode = current ? current.next : '';
     //   }
 
-    //   this.head = previouse;
+    //   this.head = previous;
      
     // }
 
     //Recursive way to reverse the Link List
-    reverceLinkList = (current) => {
+    reverseLinkList = (current) => {
         console.log("Current data ===>", current.data);
         if(current.next == null){
 
             this.head = current;
            // current.next = null;
         }else{
-            this.reverceLinkList(current.next);
+            this.reverseLinkList(current.next);
             let nextNode = current.next;
             nextNode.next = current;
             current.next = null;
@@ -195,10 +195,10 @@ ll.addAtFirstIndex(1);
 ll.addNodeAtLast(4);
 ll.addNodeAtLast(5);
 
-// Add node at perticular index
+// Add node at particular index
 ll.addAtIndex(3,2);
 
-//Remove from perticular index
+//Remove from particular index
 //ll.removeAtIndex(2);
 
 // Count number of node in link list
@@ -213,7 +213,7 @@ console.log("Data at node 1 is ===>",ll.getAtIndex(1));
 ll.printData();
 
 // Revers the link list 
-ll.reverceLinkList(ll.head, null, null);
+ll.reverseLinkList(ll.head, null, null);
 
 // Print data from the list.
 ll.printData();
