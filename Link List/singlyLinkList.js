@@ -20,7 +20,7 @@ class LinkList {
 
     //Add node at perticular index
     addAtIndex = (data, index) => {
-        const newNode = new Node(data,index);
+        const newNode = new Node(data);
         let current = this.head;
         let previouse = current;
         let count = 0;
@@ -44,13 +44,16 @@ class LinkList {
         let current = this.head;
         let previouse = current;
         let count = 0;
-       
+       if(index === count){
+        this.head = current.next;
+       }else{
         while(count < index){
             previouse = current;
             current = current.next;
             count ++;
         }
         previouse.next = current.next;
+       }
         this.size --;
     }
 
@@ -60,7 +63,7 @@ class LinkList {
         let current = this.head;
         let lastNode = null;
         if(!current) {
-            current = newNode;
+            this.head = newNode;
         } else {
             while(current){
                 if(current.next === null){
@@ -96,31 +99,37 @@ class LinkList {
         this.size = 0;
     }
 
-    // Iterative way to reverse the Link List
+    //Iterative way to reverse the Link List
     // reverceLinkList = () => {
-    //    let current = this.head;
-    //    let previouse = null;
+    //   let current = this.head;
+    //   let previouse = null;
+    //   let nextNode = current.next;
 
-    //    while(current){
-    //         let nextNode = current.next;
-    //         current.next = previouse;
-    //         previouse=current;
-    //         current = nextNode;
-    //    }
+    //   while(current){
+    //     //current = current.next;
+    //     current.next = previouse;
+    //     previouse = current;
+    //     current = nextNode;
+    //     nextNode = current ? current.next : '';
+    //   }
 
-    //    this.head = previouse;
+    //   this.head = previouse;
+     
     // }
 
-    // Recursive way to reverse the Link List
+    //Recursive way to reverse the Link List
     reverceLinkList = (current) => {
-      if(current.next == null){
-          this.head = current;
-      }else{
-          this.reverceLinkList(current.next);
-          let nextNode = current.next;
-          nextNode.next = current;
-          current.next = null;
-      }
+        console.log("Current data ===>", current.data);
+        if(current.next == null){
+
+            this.head = current;
+           // current.next = null;
+        }else{
+            this.reverceLinkList(current.next);
+            let nextNode = current.next;
+            nextNode.next = current;
+            current.next = null;
+        }
     }
 
     //Print link list data
@@ -136,6 +145,43 @@ class LinkList {
         result = result.join(' ');
         console.log("Link List ====>", result);      
     }
+
+    //print link list data in reverse order
+    printDataInRev = (current) => {
+        if(current === null) return
+        
+        this.printDataInRev(current.next);
+        console.log(current.data);
+    }
+
+    //Print middle of link list.
+    printMiddle = (head) => {
+
+        let current = head;
+
+        // Approach 1 - with taking middle
+
+        // let count = 0;
+        // while(current){
+        //     current = current.next;
+        //     count ++;
+        // }
+        // current = head;
+        // let middle = Math.floor(count/2);
+        // while(middle > 1){
+        //     current = current.next;
+        //     middle--;
+        // }
+        // console.log("Middle Data ===>", current.data);
+
+        // Approach 2 - With 2 pointer
+        let nextNode = head;
+        while(nextNode.next){
+            current = current.next;
+            nextNode = nextNode.next.next; 
+        }
+        console.log("Middle =>", current.data);
+    }
 }
 
 // Create Link List Object
@@ -147,6 +193,7 @@ ll.addAtFirstIndex(1);
 
 // Add Node at last
 ll.addNodeAtLast(4);
+ll.addNodeAtLast(5);
 
 // Add node at perticular index
 ll.addAtIndex(3,2);
@@ -171,3 +218,6 @@ ll.reverceLinkList(ll.head, null, null);
 // Print data from the list.
 ll.printData();
 
+//ll.printDataInRev(ll.head);
+
+ll.printMiddle(ll.head);
