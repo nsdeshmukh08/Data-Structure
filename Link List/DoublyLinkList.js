@@ -69,6 +69,35 @@ class DoublyLinkList {
 
     deleteFromStart(){
         this.head = this.head.next;
+        this.prev =null;
+    }
+
+    reversLinkListIterative(){
+        let current = this.head;
+        let previous = null;
+
+        while(current){
+            let temp = current.next;
+            current.next = previous;
+            previous = current;
+            current.prev = temp;
+            current = temp
+        }
+
+        this.head = previous;
+    }
+
+    reversLinkListRecursive(head){
+        if(head.next === null){
+            this.head = head;
+            this.head.next = head.prev;
+            this.head.prev = null;
+        }else{
+            this.reversLinkListRecursive(head.next);
+            let temp = head.prev;
+            head.prev = head.next;
+            head.next = temp;
+        }
     }
 
     deleteFromEnd(){
@@ -117,7 +146,8 @@ const ll = new DoublyLinkList();
 
 ll.printData();
 
-ll.deleteAtIndex(3);
+//ll.deleteAtIndex(3);
 
+ll.reversLinkListRecursive(ll.head);
 ll.printData();
 
