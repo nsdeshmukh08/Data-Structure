@@ -1,8 +1,8 @@
 function SelectionSort(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
+  for (let i = 0; i < arr.length; i++) {
     let minIndex;
     let temp;
-    for (let j = i + 1; j < arr.length - 1; j++) {
+    for (let j = i + 1; j < arr.length; j++) {
       if (arr[j] < arr[i]) {
         minIndex = j;
       }
@@ -16,4 +16,4 @@ function SelectionSort(arr) {
   console.log(arr);
 }
 
-SelectionSort([2, 3, 4, 5, 6]);
+SelectionSort([7, 5, 4, 3, 2]);
